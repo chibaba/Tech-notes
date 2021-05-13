@@ -9,7 +9,8 @@ router.get("/", async (req, res, next) => {
       return notes.read(key);
     });
     const notelist = await Promise.all(keyPromises);
-    //console.log(util.inspect(notelist));
+    // console.log(notelist)
+    // console.log(util.inspect(notelist));
     //... placeholder for Notes home page code
     res.render("index", { title: "Tech Academy Notes App" });
   } catch (err) {
