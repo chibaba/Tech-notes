@@ -73,9 +73,11 @@ router.get('/destroy', async (req, res, next) => {
 });
 
 // Really destroy note (destroy)
-router.post('/destroy/confirm', async (req, res, next) => {
-  try {
-      await notes.destroy(req.body.notekey);
-      res.redirect('/');
-  } catch (err) { next(err); }
-});
+router.get('/destroy', async (req, res, next) => {
+  var note = await notes.read(req.query.key);
+  res.render('notedestroy', {
+  title: note ? `Delete ${note.title}` : "",
+  notekey: req.query.key, 
+  note: note
+  });
+  });
