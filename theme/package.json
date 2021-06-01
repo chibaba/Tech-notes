@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "clean": "rm -rf bootstrap-4.5.0",
+"build": "cd bootstrap-4.5.0 && npm run dist",
+"watch": "cd bootstrap-4.5.0 && npm run watch",
+    "download": "wget -O - https://github.com/twbs/bootstrap/archive/v4.5.0.tar.gz | tar xvfz -",
+    "postdownload": "cd bootstrap-4.5.0 && npm install"
+  }
+}
