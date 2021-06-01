@@ -61,23 +61,23 @@ router.get('/edit', async (req, res, next) => {
 });
 
 // Ask to Delete note (destroy)
+// Ask to Delete note (destroy)
 router.get('/destroy', async (req, res, next) => {
   try {
-      let note = await notes.read(req.query.key);
+      var note = await notes.read(req.query.key);
       res.render('notedestroy', {
-          title: note ? note.title : "",
+          title: note ? `Delete ${note.title}` : "",
           notekey: req.query.key,
           note: note
       });
   } catch (err) { next(err); }
 });
 
+
 // Really destroy note (destroy)
-router.get('/destroy', async (req, res, next) => {
-  var note = await notes.read(req.query.key);
-  res.render('notedestroy', {
-  title: note ? `Delete ${note.title}` : "",
-  notekey: req.query.key, 
-  note: note
-  });
-  });
+router.post('/destroy/confirm', async (req, res, next) => {
+  try {
+      await notes.destroy(req.body.notekey);
+      res.redirect('/');
+  } catch (err) { next(err); }
+});
